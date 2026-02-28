@@ -1,0 +1,46 @@
+<div class="container mt-4">
+  <h2>Admin Dashboard</h2>
+
+  <button class="btn btn-danger float-end mb-3" (click)="logout()">
+    Logout
+  </button>
+
+  <div *ngIf="successMessage" class="alert alert-success">
+  {{ successMessage }}
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <table class="table table-bordered table-striped" *ngIf="users.length">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.id }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.role }}</td>
+        <td>
+          <button
+            class="btn btn-sm btn-danger"
+            (click)="deleteUser(user.id)"
+            [disabled]="user.role === 'ADMIN'">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="!users.length">No users found.</p>
+</div>
