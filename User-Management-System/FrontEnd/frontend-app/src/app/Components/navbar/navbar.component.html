@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 fixed-top">
+
+  <!-- LEFT SIDE -->
+  <a class="navbar-brand fw-bold" (click)="goHome()" style="cursor:pointer">
+    {{ appTitle }}
+  </a>
+
+  <!-- RIGHT SIDE -->
+  <div class="ms-auto dropdown" *ngIf="userName">
+
+    <button class="btn btn-outline-light dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown">
+      <i class="bi bi-person-circle me-1"></i>
+      {{ userName }}
+    </button>
+
+    <ul class="dropdown-menu dropdown-menu-end">
+
+      <li class="dropdown-item-text">
+        <strong>{{ userName }}</strong><br>
+        <small class="text-muted">{{ userEmail }}</small>
+      </li>
+
+      <li><hr class="dropdown-divider"></li>
+
+      <li>
+        <a class="dropdown-item" routerLink="/profile">
+          View Profile
+        </a>
+      </li>
+
+      <li>
+        <button class="dropdown-item text-danger" (click)="logout()">
+          Logout
+        </button>
+      </li>
+
+    </ul>
+
+  </div>
+
+</nav>

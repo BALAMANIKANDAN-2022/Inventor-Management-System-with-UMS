@@ -1,0 +1,60 @@
+<!-- DASHBOARD CONTENT -->
+<div class="container mt-4">
+
+  <h3 class="mb-4">Inventory Management Dashboard</h3>
+
+  <div class="row">
+
+    <!-- CATEGORY CARD -->
+    <div class="col-md-4 mb-4">
+      <div class="card shadow h-100">
+        <div class="card-body">
+          <h5 class="card-title">Category Management</h5>
+          <p class="card-text">
+            Create, update, delete and manage product categories.
+            Organize inventory efficiently with structured classification.
+          </p>
+          <button class="btn btn-primary w-100"
+                  routerLink="/admin/categories">
+            Manage Categories
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCT CARD -->
+    <div class="col-md-4 mb-4">
+      <div class="card shadow h-100">
+        <div class="card-body">
+          <h5 class="card-title">Product Management</h5>
+          <p class="card-text">
+            Add new products, update stock, adjust pricing,
+            soft delete items and monitor inventory levels.
+          </p>
+          <button class="btn btn-success w-100"
+                  routerLink="/admin/products">
+            Manage Products
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- AUDIT LOG CARD -->
+    <div class="col-md-4 mb-4">
+      <div class="card shadow h-100">
+        <div class="card-body">
+          <h5 class="card-title">Audit Logs</h5>
+          <p class="card-text">
+            Track system activities including product updates,
+            stock changes and user actions for accountability.
+          </p>
+          <button class="btn btn-warning w-100"
+                  routerLink="/admin/audit-logs">
+            View Audit Logs
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

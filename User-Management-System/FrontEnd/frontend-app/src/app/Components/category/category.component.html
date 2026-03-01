@@ -1,0 +1,59 @@
+<div class="container mt-4">
+
+  <h3>Category Management</h3>
+
+  <!-- Add / Edit Form -->
+  <div class="card p-3 mb-4">
+    <div class="form-group">
+      <label>Category Name</label>
+      <input type="text"
+             class="form-control"
+             [(ngModel)]="newCategory.name"
+             placeholder="Enter category name">
+    </div>
+
+    <button class="btn btn-primary mt-3"
+            (click)="saveCategory()">
+      {{ editMode ? 'Update' : 'Add' }}
+    </button>
+
+    <button *ngIf="editMode"
+            class="btn btn-secondary mt-3 ms-2"
+            (click)="resetForm()">
+      Cancel
+    </button>
+  </div>
+
+  <!-- Category Table -->
+  <table class="table table-bordered table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Created At</th>
+        <th>Updated At</th>
+        <th width="150">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let category of categories">
+        <td>{{ category.id }}</td>
+        <td>{{ category.name }}</td>
+        <td>{{ category.createdAt | date:'short' }}</td>
+        <td>{{ category.updatedAt | date:'short' }}</td>
+        <td>
+          <button class="btn btn-sm btn-warning me-2"
+                  (click)="editCategory(category)">
+            Edit
+          </button>
+
+          <button class="btn btn-sm btn-danger"
+                  (click)="deleteCategory(category.id!)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
