@@ -24,6 +24,7 @@ public class AuditLogAdminController {
 
     @GetMapping("/product/{productId}")
     public List<AuditLogAdminResponse> getLogsByProduct(@PathVariable Long productId) {
+        System.out.println(productId);
         return auditLogService.getLogsByProduct(productId);
     }
 }

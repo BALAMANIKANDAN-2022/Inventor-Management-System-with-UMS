@@ -29,6 +29,7 @@ export class AuditLogComponent implements OnInit {
     console.log('Received productId from query params:', productId);
 
     if (productId) {
+      console.log('Fetching logs for productId:', productId);
       this.auditService.getLogsByProduct(productId)
         .subscribe(res => {
           this.logs = res;

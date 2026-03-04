@@ -132,10 +132,10 @@ changePage(page: number) {
   }
 }
 
-viewLogs(productId: number) {
-  console.log('Navigating to audit logs with productId:', productId);
+viewLogs(productId: any) {
+  console.log('Navigating to audit logs with productId:', productId.id);
   this.router.navigate(['/admin/audit-logs'], {
-    queryParams: { productId: productId }
+    queryParams: { productId: productId.id }
   });
 }
 
