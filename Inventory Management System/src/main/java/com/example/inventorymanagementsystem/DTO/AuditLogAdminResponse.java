@@ -15,6 +15,6 @@ public record AuditLogAdminResponse(
         BigDecimal unitCostSnapshot,
         BigDecimal unitPriceSnapshot,
         String performedBy,
-        Instant CreatedAt
+        Instant createdAt
 ) {
 }

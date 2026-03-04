@@ -1,21 +1,87 @@
-<div class="container mt-4" *ngIf="user">
+<div class="container mt-4">
 
-  <h2>Welcome 👋</h2>
+  <h3>Available Products</h3>
 
-  <div class="card mt-3">
-    <div class="card-body">
-      <p><strong>User ID:</strong> {{ user.id }}</p>
-      <p><strong>Email:</strong> {{ user.email }}</p>
-      <p><strong>Role:</strong> {{ user.role }}</p>
+  <!-- FILTER BAR -->
+  <div class="row mb-3">
+
+    <div class="col-md-4">
+      <input type="text"
+             class="form-control"
+             placeholder="Search by product name"
+             [(ngModel)]="searchText"
+             (input)="filterProducts()">
     </div>
+
+    <div class="col-md-4">
+      <select class="form-control"
+              [(ngModel)]="selectedCategory"
+              (change)="filterProducts()">
+        <option [ngValue]="null">All Categories</option>
+        <option *ngFor="let c of categories"
+                [ngValue]="c.id">
+          {{c.name}}
+        </option>
+      </select>
+    </div>
+
   </div>
 
-  <button class="btn btn-danger mt-3" (click)="logout()">
-    Logout
-  </button>
+  <!-- TABLE -->
+  <table class="table table-bordered table-hover align-middle">
+    <thead class="table-dark">
+      <tr>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Available</th>
+        <th width="120">Qty</th>
+        <th width="200">Actions</th>
+      </tr>
+    </thead>
 
-</div>
+    <tbody>
+      <tr *ngFor="let p of filteredProducts">
 
-<div *ngIf="errorMessage" class="text-danger">
-  {{ errorMessage }}
+        <td>{{p.name}}</td>
+        <td>{{p.categoryName}}</td>
+        <td>{{p.unitPrice}}</td>
+
+        <td>
+          <span class="badge bg-success"
+                *ngIf="p.quantityOnHand > p.reorderLevel">
+            {{p.quantityOnHand}}
+          </span>
+
+          <span class="badge bg-warning text-dark"
+                *ngIf="p.quantityOnHand <= p.reorderLevel">
+            {{p.quantityOnHand}}
+          </span>
+        </td>
+
+        <td>
+          <input type="number"
+                  min="1"
+                  [max]="p.quantityOnHand"
+                  class="form-control"
+                  [(ngModel)]="p.tempQty">
+        </td>
+
+        <td>
+          <button class="btn btn-sm btn-success me-2"
+                  (click)="stockIn(p)">
+            Stock In
+          </button>
+
+          <button class="btn btn-sm btn-danger"
+                  (click)="stockOut(p)">
+            Stock Out
+          </button>
+        </td>
+
+      </tr>
+    </tbody>
+
+  </table>
+
 </div>

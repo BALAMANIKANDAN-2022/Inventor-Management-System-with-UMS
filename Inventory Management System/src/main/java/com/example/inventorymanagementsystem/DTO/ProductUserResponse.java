@@ -10,6 +10,7 @@ public record ProductUserResponse(
         Long categoryId,
         String categoryName,
         Integer quantityOnHand,
+        Integer reorderLevel,
         BigDecimal unitPrice,
         String status,
         String description,

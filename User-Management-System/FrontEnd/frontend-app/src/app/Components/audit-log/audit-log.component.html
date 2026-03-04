@@ -1,1 +1,103 @@
-<p>audit-log works!</p>
+<div class="container mt-4">
+
+  <h3 class="mb-3">Audit Logs</h3>
+
+  <!-- FILTER SECTION -->
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <input type="text"
+             class="form-control"
+             placeholder="Search by Product Name"
+             [(ngModel)]="searchProduct"
+             (input)="applyFilter()">
+    </div>
+
+    <div class="col-md-4">
+      <input type="text"
+             class="form-control"
+             placeholder="Search by SKU"
+             [(ngModel)]="searchSku"
+             (input)="applyFilter()">
+    </div>
+
+    <div class="col-md-4">
+      <input type="text"
+             class="form-control"
+             placeholder="Search by Type"
+             [(ngModel)]="searchType"
+             (input)="applyFilter()">
+    </div>
+  </div>
+
+  <!-- TABLE -->
+  <table class="table table-bordered table-hover table-sm align-middle">
+
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Product</th>
+        <th>SKU</th>
+        <th>Type</th>
+        <th>Qty Changed</th>
+        <th>Previous</th>
+        <th>New</th>
+        <th>Cost</th>
+        <th>Price</th>
+        <th>Performed By</th>
+        <th>Created At</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let log of paginatedLogs">
+        <td>{{log.id}}</td>
+        <td>{{log.productName}}</td>
+        <td>{{log.sku}}</td>
+        <td>
+          <span class="badge bg-info text-dark">
+            {{log.type}}
+          </span>
+        </td>
+        <td>{{log.quantityChanged}}</td>
+        <td>{{log.previousQuantity}}</td>
+        <td>{{log.newQuantity}}</td>
+        <td>{{log.unitCostSnapshot}}</td>
+        <td>{{log.unitPriceSnapshot}}</td>
+        <td>{{log.performedBy}}</td>
+        <td>{{log.createdAt | date:'medium'}}</td>
+      </tr>
+    </tbody>
+
+  </table>
+
+  <!-- PAGINATION -->
+  <nav class="mt-3">
+    <ul class="pagination justify-content-center">
+      <li class="page-item"
+          [class.disabled]="currentPage === 1">
+        <button class="page-link"
+                (click)="changePage(currentPage - 1)">
+          Previous
+        </button>
+      </li>
+
+      <li class="page-item"
+          *ngFor="let page of [].constructor(totalPages()); let i = index"
+          [class.active]="currentPage === i+1">
+        <button class="page-link"
+                (click)="changePage(i+1)">
+          {{i+1}}
+        </button>
+      </li>
+
+      <li class="page-item"
+          [class.disabled]="currentPage === totalPages()">
+        <button class="page-link"
+                (click)="changePage(currentPage + 1)">
+          Next
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+</div>

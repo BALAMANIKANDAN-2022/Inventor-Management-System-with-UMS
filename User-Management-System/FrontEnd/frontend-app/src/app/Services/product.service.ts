@@ -1,43 +1,69 @@
-// ims/services/product.service.ts
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class ProductService {
 
-  private baseUrl = 'http://localhost:8090/api/admin/products';
+  private adminUrl = 'http://localhost:8090/api/admin/products';
+  private userUrl = 'http://localhost:8090/api/products';
 
   constructor(private http: HttpClient) {}
+  private getHeaders(): HttpHeaders {
+      const token = localStorage.getItem('token');
+  
+      return new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      });
+    }
 
-  getAll() {
-    return this.http.get(this.baseUrl);
+  // ---------- ADMIN ----------
+  getAllForAdmin(): Observable<any> {
+    return this.http.get(this.adminUrl,{headers: this.getHeaders()});
   }
 
-  getById(id: number) {
-    return this.http.get(`${this.baseUrl}/${id}`);
+  getByIdForAdmin(id: number): Observable<any> {
+    return this.http.get(`${this.adminUrl}/${id}`,{headers: this.getHeaders()});
   }
 
-  create(product: any) {
-    return this.http.post(this.baseUrl, product);
+  create(product: any): Observable<any> {
+    return this.http.post(this.adminUrl, product, {headers: this.getHeaders()});
   }
 
-  update(id: number, product: any) {
-    return this.http.put(`${this.baseUrl}/${id}`, product);
+  update(id: number, product: any): Observable<any> {
+    return this.http.put(`${this.adminUrl}/${id}`, product, {headers: this.getHeaders()});
   }
 
-  delete(id: number) {
-    return this.http.delete(`${this.baseUrl}/${id}`);
+  delete(id: number): Observable<any> {
+    return this.http.delete(`${this.adminUrl}/${id}`, {headers: this.getHeaders()});
   }
 
   stockIn(id: number, quantity: number) {
-    return this.http.post(`${this.baseUrl}/${id}/stock-in?quantity=${quantity}`, {});
+    return this.http.post(`${this.adminUrl}/${id}/stock-in`,
+      null,
+      { params: new HttpParams().set('quantity', quantity), headers: this.getHeaders() });
   }
 
   stockOut(id: number, quantity: number) {
-    return this.http.post(`${this.baseUrl}/${id}/stock-out?quantity=${quantity}`, {});
+    return this.http.post(`${this.adminUrl}/${id}/stock-out`,
+      null,
+      { params: new HttpParams().set('quantity', quantity), headers: this.getHeaders() });
   }
 
-  adjust(id: number, newQuantity: number) {
-    return this.http.post(`${this.baseUrl}/${id}/adjust?newQuantity=${newQuantity}`, {});
+  adjustStock(id: number, newQuantity: number) {
+    return this.http.post(`${this.adminUrl}/${id}/adjust`,
+      null,
+      { params: new HttpParams().set('newQuantity', newQuantity), headers: this.getHeaders() });
+  }
+
+  // ---------- USER ----------
+  getAllForUser(): Observable<any> {
+    return this.http.get(this.userUrl);
+  }
+
+  getByIdForUser(id: number): Observable<any> {
+    return this.http.get(`${this.userUrl}/${id}`);
   }
 }

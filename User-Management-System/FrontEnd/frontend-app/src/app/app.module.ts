@@ -16,6 +16,7 @@ import { CategoryComponent } from './Components/category/category.component';
 import { ProductComponent } from './Components/product/product.component';
 import { AuditLogComponent } from './Components/audit-log/audit-log.component';
 import { NavbarComponent } from './Components/navbar/navbar.component';
+import { ProfileComponent } from './Components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { NavbarComponent } from './Components/navbar/navbar.component';
     ProductComponent,
     AuditLogComponent,
     NavbarComponent,
+    ProfileComponent,
   ],
   imports: [
     FormsModule,

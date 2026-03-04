@@ -11,6 +11,7 @@ import { AdminHomeComponent } from './Components/admin-home/admin-home.component
 import { CategoryComponent } from './Components/category/category.component';
 import { ProductComponent } from './Components/product/product.component';
 import { AuditLogComponent } from './Components/audit-log/audit-log.component';
+import { ProfileComponent } from './Components/profile/profile.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "/register", pathMatch: "full" },
@@ -18,6 +19,11 @@ const routes: Routes = [
   { path: "login", component: LoginComponent},
   { path: "forgot-password", component: ForgotPasswordComponent},
   { path: "reset-password", component: ResetPasswordComponent},
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
+  },
   {
     path: 'user-home',
     component: UserHomeComponent,

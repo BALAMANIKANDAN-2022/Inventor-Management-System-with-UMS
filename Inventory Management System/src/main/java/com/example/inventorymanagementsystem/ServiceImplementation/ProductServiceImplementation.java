@@ -125,7 +125,7 @@ public class ProductServiceImplementation implements ProductService {
 
     @Override
     public List<ProductUserResponse> getAllForUser() {
-        return productRepository.findAll()
+        return productRepository.findByStatus(ProductStatus.ACTIVE)
                 .stream()
                 .map(this::mapToUserProductResponse)
                 .toList();
@@ -234,6 +234,7 @@ public class ProductServiceImplementation implements ProductService {
                 product.getCategory().getId(),
                 product.getCategory().getName(),
                 product.getQuantityOnHand(),
+                product.getReorderLevel(),
                 product.getUnitPrice(),
                 product.getStatus().name(),
                 product.getDescription(),

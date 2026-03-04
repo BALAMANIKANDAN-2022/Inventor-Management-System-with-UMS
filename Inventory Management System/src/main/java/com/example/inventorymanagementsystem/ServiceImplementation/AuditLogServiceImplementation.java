@@ -25,7 +25,7 @@ public class AuditLogServiceImplementation implements AuditLogService {
 
     @Override
     public List<AuditLogAdminResponse> getLogsByProduct(Long productId) {
-        return auditLogRepository.findById(productId)
+        return auditLogRepository.findByProductId(productId)
                 .stream()
                 .map(this::mapToResponse)
                 .toList();
